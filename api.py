@@ -1,6 +1,7 @@
 import aiohttp
+from interfaces import ExchangeAPI
 
-class PrivetBankAPI:
+class PrivetBankAPI(ExchangeAPI):
     URL = "https://api.privatbank.ua/p24api/exchange_rates"
 
     async def get_rates(self, session: aiohttp.ClientSession, date: str):
