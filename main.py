@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 from pprint import pprint
 import aiohttp
 
-from api import PrivetBankAPI
+from api import PrivatBankAPI
 from service import CurrencyService
-from formatter import fotmat_rates
+from formatter import format_rates
 
 async def main():
     if len(sys.argv)<2:
@@ -16,7 +16,8 @@ async def main():
     try:
         days = int(sys.argv[1])
     except ValueError:
-        print("Кількість деів повина бути чслом.")
+        print("Кількість деів повина бути числом.")
+        return
 
     if days <1 or days > 10:
         print("Кількість днів повинна бути від 1 до 10.")
@@ -27,7 +28,7 @@ async def main():
         currencies.extend(sys.argv[2:])
 
     today = datetime.now()
-    api = PrivetBankAPI()
+    api = PrivatBankAPI()
     service = CurrencyService(api)
     async with aiohttp.ClientSession() as session:
         tasks = []
@@ -38,8 +39,8 @@ async def main():
             rates = service.get_exchange_rates(session, date_str, currencies)
             tasks.append(rates)
         results = await asyncio.gather(*tasks)
-    formatted_results = fotmat_rates(results)
+    formatted_results = format_rates(results)
     pprint(formatted_results)
-    # print(f"Потібно отримати курс за {days} днів.")
+
 if __name__ == "__main__":
     asyncio.run(main())

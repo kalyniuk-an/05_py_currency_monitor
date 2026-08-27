@@ -1,6 +1,6 @@
 from dataclasses import asdict
 
-def fotmat_rates(results):
+def format_rates(results):
     formatted_results = []
     for result in results:
         formatted_result = {}
@@ -10,4 +10,4 @@ def fotmat_rates(results):
                 formatted_result[date][currency] = asdict(rate)
         formatted_results.append(formatted_result)
 
-    return formatted_result
+    return formatted_results
