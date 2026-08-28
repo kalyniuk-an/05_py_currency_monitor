@@ -84,7 +84,7 @@ class Server:
     async def distribute(self, ws: ConnectionClosedError):
         async for message in ws:
             command = message.strip().lower()
-            if command == "exchange" or command.startswith("exchange"):
+            if command == "exchange" or command.startswith("exchange "):
                 await self.log_exchange(command)
                 parts = command.split()
                 if len(parts) == 1:

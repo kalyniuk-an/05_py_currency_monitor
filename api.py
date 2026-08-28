@@ -18,6 +18,7 @@ class PrivatBankAPI(ExchangeAPI):
                 return await response.json()
         except asyncio.TimeoutError:
             print(f"Перевищено час очікування під чіс отримання курсу валют {date}")
+            return {}
         except aiohttp.ClientError:
             print(f"Помилка мережі під час оримання курсу за {date}")
             return {}
